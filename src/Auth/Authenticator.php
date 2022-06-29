@@ -24,7 +24,7 @@ class Authenticator implements AuthenticatorInterface
         $timestamp = time();
         $nonce = uniqid();
         $signVersion = 'v2';
-        $sign = sha1("{$this->adminEmail}&{$this->openApiToken}&{$timestamp}&$nonce&$signVersion");
+        $sign = hash('sha256', "{$this->adminEmail}&{$this->openApiToken}&{$timestamp}&$nonce&$signVersion");
 
         $request->setQuery([
             'email' => $this->adminEmail,
